@@ -732,10 +732,10 @@ const VisionDermPageInner: React.FC = () => {
           <div>
             <h2 className="text-base font-bold text-white flex items-center gap-2">
               <Users className="w-5 h-5 text-indigo-400" />
-              Verified Real Dermal Patient Cohort (Both Sexes)
+              Dermal Research Dataset Cohort (Both Sexes)
             </h2>
             <p className="text-xs text-slate-400 mt-0.5">
-              Curated real-world dermal health donor records from clinical cohorts and NCI GDC (TCGA-SKCM).
+              Curated dermal research records from clinical datasets and NCI GDC (TCGA-SKCM).
             </p>
           </div>
 
@@ -767,7 +767,7 @@ const VisionDermPageInner: React.FC = () => {
         <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-[11px] text-slate-300 flex items-center gap-2">
           <Info className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>
-            <b>📖 Instruction:</b> Click <b>"Load Case into Model"</b> on any patient card below to populate the optical and genomic telemetry with that verified real case and run immediate risk stratification.
+            <b>📖 Instruction:</b> Click <b>"Load Case into Model"</b> on any patient card below to populate the optical and genomic telemetry with that research dataset case and run immediate risk stratification.
           </span>
         </div>
 

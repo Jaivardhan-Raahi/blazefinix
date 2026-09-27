@@ -202,7 +202,7 @@ export const PatientReportUploaderPage: React.FC = () => {
           <div>
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
-                <span>🔬</span> Or 1-Click Load Pre-loaded Real Patient Reports
+                <span>🔬</span> Or 1-Click Load Pre-loaded TCGA Research Reports
               </h3>
               <span className="text-xs text-slate-400">GDC TCGA / ClinVar / COSMIC Enriched</span>
             </div>

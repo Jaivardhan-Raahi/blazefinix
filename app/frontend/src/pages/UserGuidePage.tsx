@@ -49,7 +49,7 @@ export const UserGuidePage: React.FC = () => {
           How to Use the Hybrid Classical-Quantum Clinical AI Model
         </h1>
         <p className="text-xs text-slate-400 mt-1 max-w-3xl">
-          Comprehensive, easy-to-understand operational guide explaining every stage of the 5-tier architecture, live cancer genomic APIs, real patient cohort evaluation, and dual PDF report generation.
+          Comprehensive, easy-to-understand operational guide explaining every stage of the 5-tier architecture, live cancer genomic APIs, TCGA research cohort evaluation, and dual PDF report generation.
         </p>
       </div>
 
@@ -176,7 +176,7 @@ export const UserGuidePage: React.FC = () => {
                   Navigate to <b>"Cancer Genomics & APIs"</b> in the sidebar. Choose either the <b>Female Cohort</b> (Breast, Cervix, Ovary, Oral, Colorectum) or <b>Male Cohort</b> (Oral, Lung, Prostate, Stomach, Colorectum).
                 </p>
                 <div className="text-[11px] text-slate-400 bg-slate-900 p-2 rounded border border-slate-800/80">
-                  💡 <i>Tip: You can also select from the 10 pre-loaded verified real patients from NCI GDC and cBioPortal!</i>
+                  💡 <i>Tip: You can also select from the 10 pre-loaded TCGA research cases from NCI GDC and cBioPortal!</i>
                 </div>
               </div>
 
@@ -296,7 +296,7 @@ export const UserGuidePage: React.FC = () => {
           <div className="glass-panel p-6 border border-slate-800 rounded-2xl bg-slate-900/50 space-y-4">
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
               <Dna className="w-5 h-5 text-emerald-400" />
-              Live Cancer APIs & Real Patient Cohort Guide
+              Live Cancer APIs & TCGA Research Cohort Guide
             </h2>
             <p className="text-xs text-slate-300 leading-relaxed">
               How the platform interfaces with live biomedical databases and how to use the data:
@@ -309,7 +309,7 @@ export const UserGuidePage: React.FC = () => {
                   NCI Genomic Data Commons (GDC)
                 </span>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  <b>What it does:</b> Fetches real patient cases, pathology stages (e.g. Stage IIA, Stage III), and histological diagnoses across TCGA cancer projects.<br/>
+                  <b>What it does:</b> Fetches TCGA research dataset cases, pathology stages (e.g. Stage IIA, Stage III), and histological diagnoses across TCGA cancer projects.<br/>
                   <b>How to use:</b> Browse the patient table in the left panel. Click <b>"Select"</b> on any patient row to target that patient's exact stage and age in the assessment engine.
                 </p>
               </div>
