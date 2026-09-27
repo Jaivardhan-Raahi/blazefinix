@@ -12,7 +12,8 @@ import {
   Cpu,
   Info,
   HelpCircle,
-  Users
+  Users,
+  AlertTriangle
 } from 'lucide-react';
 import {
   fetchTopCancers,
@@ -61,6 +62,7 @@ export const CancerGenomicsPage: React.FC = () => {
   const [evaluationResult, setEvaluationResult] = useState<any>(null);
   const [isDownloadingPdf, setIsDownloadingPdf] = useState<boolean>(false);
   const [downloadSuccess, setDownloadSuccess] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Initial Load
   useEffect(() => {
@@ -171,6 +173,7 @@ export const CancerGenomicsPage: React.FC = () => {
 
     setIsEvaluating(true);
     setDownloadSuccess(null);
+    setErrorMessage(null);
     try {
       const result = await evaluateCancerRisk(payload);
       setEvaluationResult(result);
@@ -181,7 +184,7 @@ export const CancerGenomicsPage: React.FC = () => {
     } catch (err: any) {
       console.error('Cancer evaluation failed:', err);
       setEvaluationResult(null);
-      alert('LOCAL COMPUTATION OFFLINE — Backend at http://localhost:8000 is unreachable. No fake predictions will be generated.');
+      setErrorMessage(err?.message || 'LOCAL COMPUTATION OFFLINE — Backend is unreachable.');
     } finally {
       setIsEvaluating(false);
     }
@@ -299,10 +302,10 @@ export const CancerGenomicsPage: React.FC = () => {
             <span className="text-xs text-slate-500 font-mono">Live Multi-Cancer APIs</span>
           </div>
           <h1 className="text-lg font-bold text-slate-900 tracking-tight">
-            Cancer Genomic Structure & Real Patient Cohort Explorer
+            Cancer Genomic Structure & Research Cohort Explorer
           </h1>
           <p className="text-xs text-slate-600 mt-0.5 max-w-3xl">
-            Live query and integration with <b>NCI GDC</b> (real patient cases & tumor staging), <b>cBioPortal</b> (somatic mutations), <b>Ensembl REST</b> (real chromosome exon structures), and <b>ICGC-ARGO</b> standards.
+            Live query and integration with <b>NCI GDC</b> (TCGA cohort records & tumor staging), <b>cBioPortal</b> (somatic mutations), <b>Ensembl REST</b> (chromosome exon structures), and <b>ICGC-ARGO</b> standards.
           </p>
         </div>
 
@@ -339,12 +342,12 @@ export const CancerGenomicsPage: React.FC = () => {
             Choose Female or Male Top 5 cancers below (e.g. Breast 30.4%, Oral Cavity 20.4%, Lung 10.1%).
           </div>
           <div className="p-2.5 rounded bg-white border border-slate-200">
-            <span className="font-bold text-slate-900 block mb-0.5">2. Inspect Real Exons</span>
+            <span className="font-bold text-slate-900 block mb-0.5">2. Inspect Exons</span>
             Click on driver genes (TP53, BRCA1, EGFR) to view live chromosome coordinates from Ensembl.
           </div>
           <div className="p-2.5 rounded bg-white border border-slate-200">
-            <span className="font-bold text-slate-900 block mb-0.5">3. Select a Real Patient</span>
-            Pick a real patient case from NCI GDC or load from our pre-validated Real Patients Library.
+            <span className="font-bold text-slate-900 block mb-0.5">3. Select a Research Case</span>
+            Pick a TCGA research record from NCI GDC or load from our pre-validated TCGA Research Dataset Library.
           </div>
           <div className="p-2.5 rounded bg-white border border-slate-200">
             <span className="font-bold text-slate-900 block mb-0.5">4. Run AI/QML & Download PDF</span>
@@ -353,18 +356,18 @@ export const CancerGenomicsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 3. REAL PATIENTS LIBRARY & DOWNLOADABLE REPORTS */}
+      {/* 3. TCGA RESEARCH DATASET LIBRARY & DOWNLOADABLE REPORTS */}
       <div className="clinical-card p-5 space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4 text-cyan-700" />
               <h2 className="text-sm font-bold text-slate-900">
-                Real Patient Cohort & Downloadable Clinical Reports Library
+                TCGA Research Cohort & Downloadable Reports Library
               </h2>
             </div>
             <p className="text-xs text-slate-500 mt-0.5">
-              Verified real-world cancer donor cases from NCI GDC and cBioPortal across both biological sexes.
+              TCGA research dataset donor cases from NCI GDC and cBioPortal across both biological sexes.
             </p>
           </div>
 
@@ -385,7 +388,7 @@ export const CancerGenomicsPage: React.FC = () => {
                 realPatientSexTab === 'females' ? 'bg-cyan-700 text-white shadow-xs' : 'text-slate-700 hover:bg-slate-200'
               }`}
             >
-              Female Cohort (5 Patients)
+              Female Cohort (5 Cases)
             </button>
             <button
               onClick={() => setRealPatientSexTab('males')}
@@ -393,7 +396,7 @@ export const CancerGenomicsPage: React.FC = () => {
                 realPatientSexTab === 'males' ? 'bg-cyan-700 text-white shadow-xs' : 'text-slate-700 hover:bg-slate-200'
               }`}
             >
-              Male Cohort (5 Patients)
+              Male Cohort (5 Cases)
             </button>
           </div>
         </div>
@@ -726,12 +729,12 @@ export const CancerGenomicsPage: React.FC = () => {
 
       {/* 6. Two-Column Live Real APIs: NCI GDC Cases & cBioPortal Driver Mutations */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        {/* NCI GDC Real Patient Cases */}
+        {/* NCI GDC Research Cohort Cases */}
         <div className="clinical-card p-5 space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Database className="w-4 h-4 text-cyan-700" />
-              <h3 className="text-sm font-bold text-slate-900">NCI GDC Patient Cohort ({selectedCancer?.project_id})</h3>
+              <h3 className="text-sm font-bold text-slate-900">NCI GDC Research Cohort ({selectedCancer?.project_id})</h3>
             </div>
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
               api.gdc.cancer.gov
@@ -869,6 +872,13 @@ export const CancerGenomicsPage: React.FC = () => {
             {isEvaluating ? 'Executing Hybrid VQC Pipeline...' : 'Run Hybrid AI/QML Cancer Assessment'}
           </button>
         </div>
+
+        {errorMessage && (
+          <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-lg text-amber-900 text-xs flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+            <span>{errorMessage}</span>
+          </div>
+        )}
 
         {/* Evaluation Output Dashboard */}
         {evaluationResult && (
